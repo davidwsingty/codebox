@@ -28,7 +28,7 @@ input, label, select {
     background: lightslategray;
     padding: 90px; 
     width: 350px;
-    height: 250px;  
+    height: 220px;  
   }
 
 
@@ -40,7 +40,7 @@ input, label, select {
     font-size: 18px;
     font-family: Verdana;
     background-color: darkslategray;
-    margin-left: 120px;
+    margin-left: 150px;
 }
 
 

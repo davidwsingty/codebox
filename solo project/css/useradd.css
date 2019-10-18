@@ -1,0 +1,56 @@
+
+
+label {
+    width: 140px;
+    text-align: left;
+    padding-right: 1px;
+    color: white;
+}
+
+
+input, label, select {
+    float: left;
+    font-family: Verdana;
+    font-size: 16px;
+}
+
+
+#heading01 {
+    color: white;
+    background-color: olivedrab;
+    text-align: center;
+    
+}
+
+
+#para2 {
+    border-radius: 15px;
+    background: lightslategray;
+    padding: 90px; 
+    width: 350px;
+    height: 250px;  
+  }
+
+
+  
+#reset {
+    height: 35px;
+    width: 70px;
+    color:whitesmoke;
+    font-size: 18px;
+    font-family: Verdana;
+    background-color: darkslategray;
+    margin-left: 120px;
+}
+
+
+#savebutton {
+    height: 35px;
+    width: 70px;
+    color:whitesmoke;
+    font-size: 18px;
+    font-family: Verdana;
+    background-color: darkslategray;
+    margin-left: 50px;
+    
+}

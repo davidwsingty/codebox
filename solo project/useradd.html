@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/useradd.css">
+    <script src="./javascript/useradd.js"></script>
+</head>
+
+
+<body>
+    <p id="para2">
+        
+        <label style="color: seashell;"><strong>ADD EMPLOYEE</strong></label>
+        <br><br><br>
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" maxlength="40"></input>
+        <br><br><br>
+    
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name" maxlength="40"></input>
+        <br><br><br>
+    
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" maxlength="40"></input>
+        <br><br><br>
+    
+        <label for="level">Level:</label>
+
+        <select id="ics">
+            <option value="IC1">IC1</option>
+            <option value="IC2">IC2</option>
+            <option value="IC3">IC3</option>
+            <option value="IC4">IC4</option>
+        </select>
+        <br><br><br>
+
+        <button value="Save" name="savebutton" id="savebutton" onclick="validate()">Save</button>
+        <input type="reset" value="Reset" id="reset" name="reset" onclick="reset()">
+    </p>
+
+    
+
+
+</body>
+
+</html>
+
+
+

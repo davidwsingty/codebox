@@ -2,6 +2,8 @@
 import os 
 
 
+
+
 li, ipa, line = [], [], ""
 os.system('cp /etc/hosts /etc/hosts.`date +%F`')
 filename1 = "/etc/hosts"
@@ -47,6 +49,18 @@ with open(filename2, 'a') as f:
     for line in ipa:
         f.write(line)
         f.write('\n')
+
+
+
+""" Generating and copying the ssh keys """
+ans = raw_input("Do you want to generate new ssh key? Type y or n:")
+if ans == "y":
+    os.system('ssh-keygen')
+
+ans2 = raw_input("Do you want to copy the ssh key to the hosts? Type y or n:")
+if ans == "y":
+    for item in ipa:
+        os.system('ssh-copy-id root@' + item)
 
 
 

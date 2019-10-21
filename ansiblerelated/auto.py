@@ -38,13 +38,18 @@ with open(filename1, 'a') as f:
 grp = raw_input("Please enter a group name:")
 grp = "[" + grp + "]"
 
-""" writing the group name to the inventory file """
-os.system('echo ' + grp + ' > inventory')
 
+
+""" writing the group name and ip-addresses to the inventory file """
+os.system('echo ' + grp + ' > inventory')
 
 with open(filename2, 'a') as f:
     for line in ipa:
         f.write(line)
         f.write('\n')
+
+
+
+
 
 

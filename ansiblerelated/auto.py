@@ -61,9 +61,3 @@ ans2 = raw_input("Do you want to copy the ssh key to the hosts? Type y or n:")
 if ans == "y":
     for item in ipa:
         os.system('ssh-copy-id root@' + item)
-
-
-
-
-
-

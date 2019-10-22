@@ -68,8 +68,7 @@ grp = raw_input("Please enter a group name:")
 grp = "[" + grp + "]"
 
 
-
-""" writing the group name and ip-addresses to the inventory file """
+"""
 with open('inventory', 'r') as f:
     for eachline in f:
         if "[" + grp + "]" in eachline:
@@ -81,7 +80,9 @@ with open('inventory', 'r') as f:
 for line in myli:
     if "[" + grp + "]" in line:
         os.system('echo ' + grp + ' >> inventory')
+"""
 
+os.system('echo ' + grp + ' > inventory')
 
 with open(filename2, 'a') as f:
     for line in ipa:

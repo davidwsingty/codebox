@@ -4,17 +4,29 @@
 # Updated Date: 22/10/2019 02:45 IST
 
 
-import os 
+import os
+import socket 
 
 
+filename1 = "/etc/hosts"
+filename2 = "inventory"
 li, ipa, line = [], [], ""
 myli = []
 
-def find_line(word):
-    with open('inventory', 'r') as f:
+
+def find_line(word, filename):
+    with open(filename, 'r') as f:
         for line in f:
             if word in line:
                 return line
+
+
+
+def checkfile(keyword, filename):
+    with open(filename) as f:
+        for eachline in f:
+            if keyword in str(eachline):
+                return "YES"
 
 
 
@@ -23,44 +35,58 @@ if an == 'y':
     os.system('apt install ansible -y')
 
 
-os.system('cp /etc/hosts /etc/hosts.`date +%F`')
-filename1 = "/etc/hosts"
-filename2 = "inventory"
+os.system('cp /etc/hosts /etc/hosts.`date +%s`')
+
 
 
 print("This will append entries in the /etc/hosts file")
 
 while line != "q":
-    line = raw_input("Enter <IP-ADDR> <HOSTNAME> or 'q' to Quit:")
-    if line not in li:
-        li.append(line)
-    ip_addr = line.split()
+    line = raw_input("Enter HOSTNAME or 'q' to Quit:\n")
+    print("=" * 30 + "\n\n")
+    addr1 = socket.gethostbyname_ex(line)
+    data = "".join(addr1[-1]) +" "+ "".join(addr1[0])
+    if data not in li:
+        if line != "q":
+            li.append(data)
+    ip_addr = data.split()
     if ip_addr[0] not in ipa:
-        ipa.append(ip_addr[0])
+        if line != "q":
+            ipa.append(ip_addr[0])
+
 
 
 """ deleting q from the lists"""
-ipa.pop(ipa.index('q'))
-li.pop(li.index('q'))
+try:
+    ipa.pop(ipa.index('q'))
+    li.pop(li.index('q'))
+except:
+    pass
+
+
 
 """ adding a newline to the /etc/hosts file """
-with open(filename1, 'a') as f:
-    f.write('\n')
+try:
+    with open(filename1, 'a') as f:
+        x = checkfile("Ansible nodes", filename1)
+        if x == None:
+            f.write('\n')
+            f.write('Ansible nodes')
+            f.write('\n')
+            f.write('=' * 30)
+            f.write('\n')
+except:
+    pass
+
+
 
 """ adding the ip-add hostname entries to /etc/hosts file """
 with open(filename1, 'a') as f:
-    for line in li:
-        x = find_line(line)
-        if not x:
+    for line in li:  # li list holds IP-addr hostname mapping
+        x = checkfile(str(line), filename1)
+        if x == None:
             f.write(line)
             f.write('\n')
-
-
-
-uniqlines = set(open('/etc/hosts').readlines())
-with open('/etc/hosts', 'w') as f:
-    f. writelines(set(uniqlines))
-
 
 
 """ asking the user to create a group name for ansbile inventory file """
@@ -68,35 +94,20 @@ grp = raw_input("Please enter a group name:")
 grp = "[" + grp + "]"
 
 
-"""
-with open('inventory', 'r') as f:
-    for eachline in f:
-        if "[" + grp + "]" in eachline:
-            myli = []
-            if eachline not in myli:             
-                myli.append(eachline)
+
+x = checkfile(grp, filename2)
+if x == None:
+    os.system('echo ' + grp + ' >> inventory') # append group name to inventory file
 
 
-for line in myli:
-    if "[" + grp + "]" in line:
-        os.system('echo ' + grp + ' >> inventory')
-"""
-
-os.system('echo ' + grp + ' > inventory')
 
 with open(filename2, 'a') as f:
     for line in ipa:
-        x = find_line(line)
-        if x != str(line):
+        x = find_line(line, filename2)
+        if x == None:
             f.write(line)
             f.write('\n')
 
-
-"""
-uniqlines = set(open(filename2).readlines())
-with open(filename2, 'w') as f:
-    f. writelines(set(uniqlines))
-"""
 
 
 """ Generating and copying the ssh keys """
@@ -107,4 +118,5 @@ if ans == "y":
 ans2 = raw_input("Do you want to copy the ssh key to the hosts? Type y or n:")
 if ans == "y":
     for item in ipa:
+        print(ipa)
         os.system('ssh-copy-id root@' + item)

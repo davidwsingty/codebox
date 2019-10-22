@@ -4,6 +4,14 @@ import os
 
 
 li, ipa, line = [], [], ""
+myli = []
+
+def find_line(word):
+    with open('inventory', 'r') as f:
+        for line in f:
+            if word in line:
+                return line
+
 
 
 an = raw_input('Do you want to install ansible? Type y or n:')
@@ -38,8 +46,17 @@ with open(filename1, 'a') as f:
 """ adding the ip-add hostname entries to /etc/hosts file """
 with open(filename1, 'a') as f:
     for line in li:
-        f.write(line)
-        f.write('\n')
+        x = find_line(line)
+        if not x:
+            f.write(line)
+            f.write('\n')
+
+
+
+uniqlines = set(open('/etc/hosts').readlines())
+with open('/etc/hosts', 'w') as f:
+    f. writelines(set(uniqlines))
+
 
 
 """ asking the user to create a group name for ansbile inventory file """
@@ -49,13 +66,32 @@ grp = "[" + grp + "]"
 
 
 """ writing the group name and ip-addresses to the inventory file """
-os.system('echo ' + grp + ' > inventory')
+with open('inventory', 'r') as f:
+    for eachline in f:
+        if "[" + grp + "]" in eachline:
+            myli = []
+            if eachline not in myli:             
+                myli.append(eachline)
+
+
+for line in myli:
+    if "[" + grp + "]" in line:
+        os.system('echo ' + grp + ' >> inventory')
+
 
 with open(filename2, 'a') as f:
     for line in ipa:
-        f.write(line)
-        f.write('\n')
+        x = find_line(line)
+        if x != str(line):
+            f.write(line)
+            f.write('\n')
 
+
+"""
+uniqlines = set(open(filename2).readlines())
+with open(filename2, 'w') as f:
+    f. writelines(set(uniqlines))
+"""
 
 
 """ Generating and copying the ssh keys """
@@ -70,6 +106,9 @@ if ans == "y":
 
 
 
+
+   
+        
 
 
 

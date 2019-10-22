@@ -1,6 +1,10 @@
+# Python Script to install and configure ansible
+# Python Version: 2.7
+# Author: David Ingty <wsingty@gmail.com>
+# Updated Date: 22/10/2019 02:45 IST
+
 
 import os 
-
 
 
 li, ipa, line = [], [], ""
@@ -103,12 +107,3 @@ ans2 = raw_input("Do you want to copy the ssh key to the hosts? Type y or n:")
 if ans == "y":
     for item in ipa:
         os.system('ssh-copy-id root@' + item)
-
-
-
-
-   
-        
-
-
-

@@ -21,6 +21,6 @@ if [[ -z $(grep "export https_proxy" $FILENAME1) ]]; then
     echo "export https_proxy" >> $FILENAME1
 fi
 
-source $FILENAME1
+. $FILENAME1
 
 

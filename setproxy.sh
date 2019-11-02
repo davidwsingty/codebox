@@ -1,6 +1,7 @@
 
 # This script is used to set the proxy in Linux distros which uses /etc/profile
 # pass the value of $1 as the first positional parameter
+# run this script with . ./setproxy.sh
 
 FILENAME1=/etc/profile
 
